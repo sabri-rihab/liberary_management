@@ -2,11 +2,17 @@
 require_once __DIR__ . '/../src/Repositories/BookRepository.php';
 require_once __DIR__ . '/../src/Repositories/AuthorRepository.php';
 require_once __DIR__ . '/../src/Repositories/CategoryRepository.php';
+require_once __DIR__ . '/../src/Repositories/LibraryBranchRepository.php';
+require_once __DIR__ . '/../src/Repositories/BookCopyRepository.php';
+
 
 
 $bookRepo = new BookRepository();
 $authorRepo = new AuthorRepository();
 $catRepo = new CategoryRepository();
+$branchRepo = new LibraryBranchRepository();
+$copyRepo = new BookCopyRepository();
+
 
 //*****************    test add book    *********************** :
 // $book = new Book(1001, 'before the coffee gets cold', 2008, 'available');
@@ -85,12 +91,39 @@ $catRepo = new CategoryRepository();
 
 
 
+//---------------------------------------------------------------------------------
+//=> library branches
+// list :
+// $branches = $branchRepo->getAll();
+// foreach ($branches as $b) {
+//     echo $b->getName() . " - " . $b->getLocation() . "\n";
+// }
+
+// find by id :
+// $found = $branchRepo->findById(1);
+// echo $found ? $found->getName() : "Not found";
 
 
 
 
+//--------------------------------------------------------------------------------------------------
+// =>book copy:
+// add :
+// $copy = new BookCopy(1, 1001, 5, 65);
+// echo $copyRepo->addBookCopy($copy) ? "Book copy added\n" : "Insert failed\n";
 
 
+// check the copies :
+// $copies = $copyRepo->getByBook(1001);
+// foreach ($copies as $c) {
+//     echo "Branch: {$c->getBiblioId()} | Copies: {$c->getAvailableCopies()}\n";
+// }
+
+
+// update the availbale copies :
+// echo $copyRepo->updateAvailableCopies(6, 40)
+//     ? "Copies updated\n"
+//     : "Update failed\n";
 
 
 
