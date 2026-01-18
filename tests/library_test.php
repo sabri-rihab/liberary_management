@@ -4,6 +4,8 @@ require_once __DIR__ . '/../src/Repositories/AuthorRepository.php';
 require_once __DIR__ . '/../src/Repositories/CategoryRepository.php';
 require_once __DIR__ . '/../src/Repositories/LibraryBranchRepository.php';
 require_once __DIR__ . '/../src/Repositories/BookCopyRepository.php';
+require_once __DIR__ . '/../src/Repositories/MemberRepository.php';
+require_once __DIR__ . '/../src/Repositories/BorrowRepository.php';
 
 
 
@@ -12,6 +14,8 @@ $authorRepo = new AuthorRepository();
 $catRepo = new CategoryRepository();
 $branchRepo = new LibraryBranchRepository();
 $copyRepo = new BookCopyRepository();
+$memberRepo = new MemberRepository();
+$borrowRepo = new BorrowRepository();
 
 
 //*****************    test add book    *********************** :
@@ -116,27 +120,52 @@ $copyRepo = new BookCopyRepository();
 // check the copies :
 // $copies = $copyRepo->getByBook(1001);
 // foreach ($copies as $c) {
-//     echo "Branch: {$c->getBiblioId()} | Copies: {$c->getAvailableCopies()}\n";
-// }
+    //     echo "Branch: {$c->getBiblioId()} | Copies: {$c->getAvailableCopies()}\n";
+    // }
+    
+    
+    // update the availbale copies :
+    // echo $copyRepo->updateAvailableCopies(6, 40)
+    //     ? "Copies updated\n"
+    //     : "Update failed\n";
+    
+
+    
+//--------------------------------------------------------------------------------------------------
+// => Members
+// add member:
+// $student = new StudentMember(1,'oussama','oussama@etu.ma',0,0,'2024-09-01','2025-06-30');
+// echo $memberRepo->addMember($student) ? "Student added\n" : "Failed\n";    
 
 
-// update the availbale copies :
-// echo $copyRepo->updateAvailableCopies(6, 40)
-//     ? "Copies updated\n"
-//     : "Update failed\n";
+//find by id:
+// $m = $memberRepo->findById(1);
+// echo $m->getName() . " | " . $m->getRole() . "\n";
 
 
 
 
+//--------------------------------------------------------------------------------------------------
+// => borrowing system :
+// borrow:
+// $borrow = new BorrowRecord(1,1,date('Y-m-d'),date('Y-m-d', strtotime('+14 days')),null,0);
+// echo $borrowRepo->borrowBook($borrow) ? "Borrowed\n" : "Failed\n";
 
 
 
+//return 
+// echo $borrowRepo->returnBook(1,1,date('Y-m-d'),5.0) ? "Returned\n" : "Return failed\n";
+
+
+//memeber history :
+// $history = $borrowRepo->getMemberHistory(1);
+// print_r($history);
 
 
 
-
-
-
+// get over due borrows :
+$overdue = $borrowRepo->getOverdueBorrows();
+print_r($overdue);
 
 
 
